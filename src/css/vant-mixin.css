@@ -1,0 +1,11 @@
+.van-tabbar {
+	background:#F4F5F7;
+}
+
+.van-tabbar-item {
+	font-size:10px;
+}
+
+.van-tabbar-item--active {
+	color:#f85959;
+}
