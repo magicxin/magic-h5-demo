@@ -1,5 +1,6 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -45,10 +46,13 @@ module.exports = {
       'vue$':'vue/dist/vue.js',
       '@':path.resolve(__dirname,'../src'),
       'pages':path.resolve(__dirname,'../src/pages'),
+      'css':path.resolve(__dirname,'../src/css'),
+      'assets':path.resolve(__dirname,'../src/assets'),
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new HtmlWebpackPlugin()
   ]
 }

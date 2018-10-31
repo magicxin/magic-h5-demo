@@ -8,6 +8,7 @@ module.exports = {
     autoOpenBrowser: false
   },
   build: {
-    
+    assetsSubDirectory: 'static',
+    assetsRoot:  path.resolve(__dirname, '../dist')
   }
 }
