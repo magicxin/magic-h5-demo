@@ -9,6 +9,6 @@ module.exports = {
   },
   build: {
     assetsSubDirectory: 'static',
-    assetsRoot:  path.resolve(__dirname, '../dist')
+    assetsRoot:  path.resolve(__dirname, '../native')
   }
 }

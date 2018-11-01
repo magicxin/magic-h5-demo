@@ -10,7 +10,6 @@ import '@/css/_reset.scss'
 
 Vue.config.productionTip = false
 Vue.use(Vant)
-
 import init from './utils/init'
 /* eslint-disable no-new */
 new Vue({

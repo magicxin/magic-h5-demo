@@ -8,7 +8,7 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
-
+const server = require('./server.js')
 const devConfig = merge(baseConfig, {
   mode: 'development',
   devServer: {
@@ -17,7 +17,10 @@ const devConfig = merge(baseConfig, {
     port: PORT || config.dev.port,
     open: config.dev.autoOpenBrowser,
     hot: true,
-    quiet: true
+    quiet: true,
+    before(app) {
+    	server(app)
+    }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

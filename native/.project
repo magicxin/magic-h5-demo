@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>magic-h5+demo</name>
+	<name>native</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,13 +10,19 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>com.pandora.projects.ui.MKeyBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>com.aptana.projects.webnature</nature>
+		<nature>com.pandora.projects.ui.MKeyNature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1540793255174</id>
+			<id>1541032943395</id>
 			<name></name>
 			<type>26</type>
 			<matcher>

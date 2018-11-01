@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import axios from 'axios'
 
 Vue.mixin({
   created() {
@@ -11,3 +12,5 @@ Vue.mixin({
   	document.removeEventListener("plusready", this.plusReady)
   }
 })
+
+Vue.$axios = Vue.prototype.$axios = axios

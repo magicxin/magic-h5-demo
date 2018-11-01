@@ -1,21 +1,10 @@
 <template>
   <div class="main">
   	<!--<van-nav-bar title="标题"/>-->
-  	<header class="header">
-  		<div class="logo"></div>
-  		<div class="search">
-  			<van-icon name="search" />
-  			<div style="margin-left:4px;">爬山偶遇外交部长</div>
-  		</div>
-  	</header>
-		<van-tabs v-model="swipe" swipeable>
-		  <van-tab class="tab-container" v-for="(item,index) in tabs" :title="item.title" :key="index">内容{{ index }}</van-tab>
-		</van-tabs>
-		
-		<div class="send-news">
+		<div class="send-news" @click="popup">
 			+
 		</div>
-		
+		<component :is="page[active]"></component>
     <van-tabbar v-model="active">
 		  <van-tabbar-item icon="shop">首页</van-tabbar-item>
 		  <van-tabbar-item icon="chat">视频</van-tabbar-item>
@@ -23,69 +12,64 @@
 		  <van-tabbar-item icon="records">微头条</van-tabbar-item>
 		  <van-tabbar-item icon="gold-coin">我的</van-tabbar-item>
 		</van-tabbar>
+		
+		<van-popup v-model="showPop" position="bottom" class="popup">
+			<div class="flex-row justify-around toolbars">
+				<div class="flex-column flex-center" @click="navTo">
+					<div class="icon-container">
+						<van-icon name="edit-data" class="icon-text"/>
+					</div>
+					<span>文字</span>
+				</div>
+				
+				<div class="flex-column flex-center" @click="navTo">
+					<div class="icon-container">
+						<van-icon name="photo"  class="icon-image"/>
+					</div>
+					<span>图片</span>
+				</div>
+			</div>
+			<div class="flex-row flex-center" @click="close">
+				<van-icon name="close" />
+			</div>
+		</van-popup>
   </div>
 </template>
 
 <script>
+import home from 'pages/home/home'
+import videoCenter from 'pages/videoCenter/video-center'
+import microNews from 'pages/microNews/micro-news'
+import userCenter from 'pages/userCenter/user-center'
 export default {
   name: 'hello',
+  components: {home,videoCenter,microNews,userCenter},
   data() {
   	return {
-  		tabs: [{
-  			title: '推荐'
-  		},{
-  			title: '热点'
-  		},{
-  			title: '长春'
-  		},{
-  			title: '娱乐'
-  		}],
   		active: 0,
-  		swipe: 0
+  		showPop: false,
+  		page: [home.name,videoCenter.name,'',microNews.name,userCenter.name]
   	}
   },
   mounted() {
   	
   },
   methods: {
-  	
+  	popup() {
+  		this.showPop = true
+  	},
+  	close() {
+  		this.showPop = false
+  	},
+  	navTo() {
+//		this.$router.push('')
+  	}
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.main {
-		.header {
-			width:100%;
-			height: 46px;
-	    position: relative;
-	    display:flex;
-	    align-items:center;
-	    line-height: 46px;
-	    padding: 0 14px;
-		}
-		.search {
-			flex:1;
-			height:20px;
-			display:flex;
-			align-items: center;
-			margin-left:14px;
-			background: #F4F5F7;
-			color:#333;
-			font-size:12px;
-			padding: 0 12px;
-			border-radius: 4px;
-		}
-		.logo {
-			width:70px;
-			height: 18px;
-			background-image:url('//s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png');
-			background-repeat: no-repeat;
-			background-size: 100% 100%;
-		}
-		.tab-container {
-			height:calc(100vh - 140px);
-		}
 		.send-news {
 			width:50px;
 			height:50px;
@@ -96,13 +80,33 @@ export default {
 			color:#000;
 			border: 1px solid #E4E4E4;
 			z-index: 2;
-			background:#fff;
+			/*background:#fff;*/
+			@include bg_color($background-color-theme);
 			border-radius: 50%;
 			font-size:30px;
 			line-height:50px;
 			text-align: center;
-			
 		}
+		.popup {
+			padding:24px 24px 12px 24px;
+		}
+		.toolbars {
+			padding: 24px 0;
+		}
+		.icon-container {
+        font-size:20px;
+        line-height:1em;
+        padding:14px 14px 12px 14px;
+        border: 1px solid #EBEBEB;
+        border-radius: 18px;
+        margin: 14px;
+      }
+      .icon-text {
+        color: #578FEC;
+      }
+      .icon-image {
+        color: #16DD9A;
+      }
 	}
 	
 </style>
