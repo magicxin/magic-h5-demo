@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 
+Vue.$axios = Vue.prototype.$axios = axios
 Vue.mixin({
   created() {
   	if(this.plusReady) {
@@ -13,4 +14,14 @@ Vue.mixin({
   }
 })
 
-Vue.$axios = Vue.prototype.$axios = axios
+//Vue.directive('theme',{
+//bind(el) {
+//  console.log(el)
+//  el.dataset.theme = Vue.$theme
+//},
+//updated(el) {
+//  console.log(el)
+//  el.dataset.theme = Vue.$theme
+//}
+//})
+

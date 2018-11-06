@@ -1,5 +1,6 @@
-@import "./scss/variable.scss"
-@import "./scss/mixin.scss"
+@import "./scss/variable";
+@import "./scss/mixin";
+@import './vant-mixin.scss';
 
 * {
 	-webkit-user-select: none;

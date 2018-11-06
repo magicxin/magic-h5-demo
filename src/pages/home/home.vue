@@ -75,6 +75,7 @@
       align-items: center;
       margin-left:14px;
       background: #F4F5F7;
+      @include bg_color($background-color-theme);
       color:#333;
       font-size:12px;
       padding: 0 12px;

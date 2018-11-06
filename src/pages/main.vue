@@ -68,8 +68,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	.main {
+	  min-height:calc(100vh - 50px);
+	  @include bg_color($background-color-theme);
+	  @include font_color($font-color-theme);
 		.send-news {
 			width:50px;
 			height:50px;
@@ -81,6 +84,7 @@ export default {
 			border: 1px solid #E4E4E4;
 			z-index: 2;
 			/*background:#fff;*/
+			/*background-color: $background-color-theme1;*/
 			@include bg_color($background-color-theme);
 			border-radius: 50%;
 			font-size:30px;

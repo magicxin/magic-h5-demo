@@ -1,7 +1,10 @@
 .van-tabbar {
 	background:#F4F5F7;
+	@include bg_color($background-color-theme);
 }
-
+.van-tab {
+  @include bg_color($background-color-theme);
+}
 .van-tabbar-item {
 	font-size:10px;
 }

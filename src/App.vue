@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :data-theme="$root.theme">
     <router-view/>
   </div>
 </template>
@@ -43,6 +43,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+#app {
+  /*height:100vh;
+  @include bg_color($background-color-theme);*/
+}
 </style>
