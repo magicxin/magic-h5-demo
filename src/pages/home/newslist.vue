@@ -1,6 +1,12 @@
 <template>
 	<div class="newslist">
 	   图片<input type="file" accept="image/*" multiple="multiple" @change="change"/><br>
+		 <select v-model="newsType">
+			 <option value="all">推荐</option>
+			 <option value="hot">热点</option>
+			 <option value="city">长春</option>
+			 <option value="entertainment">娱乐</option>
+		 </select><br>
 	  标题<input v-model="title"/><br>
 	  作者<input v-model="author"/><br>
 	  内容<textarea v-model="article"></textarea><br>
@@ -45,7 +51,8 @@
 				article:'',
 				title: '',
 				author: '',
-				images: []
+				images: [],
+				newsType: 'all',
 			}
 		},
 		props: {
@@ -78,7 +85,8 @@
 			},
 			tap() {
 			  this.$axios.post('/headline/news/create',{
-			    title: this.title,
+					title: this.title,
+					type: this.newsType,
           author:{
             name:this.author,
             avatar:'/avatar.jpg'
