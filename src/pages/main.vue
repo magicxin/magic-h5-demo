@@ -15,14 +15,14 @@
 		
 		<van-popup v-model="showPop" position="bottom" class="popup">
 			<div class="flex-row justify-around toolbars">
-				<div class="flex-column flex-center" @click="navTo">
+				<div class="flex-column flex-center" @click="edit">
 					<div class="icon-container">
 						<van-icon name="edit-data" class="icon-text"/>
 					</div>
 					<span>文字</span>
 				</div>
 				
-				<div class="flex-column flex-center" @click="navTo">
+				<div class="flex-column flex-center" @click="edit">
 					<div class="icon-container">
 						<van-icon name="photo"  class="icon-image"/>
 					</div>
@@ -33,6 +33,10 @@
 				<van-icon name="close" />
 			</div>
 		</van-popup>
+		
+		<van-popup v-model="showEditor" position="right" class="editor">
+      <editor @close="close"></editor>
+    </van-popup>
   </div>
 </template>
 
@@ -41,13 +45,15 @@ import home from 'pages/home/home'
 import videoCenter from 'pages/videoCenter/video-center'
 import microNews from 'pages/microNews/micro-news'
 import userCenter from 'pages/userCenter/user-center'
+import editor from 'pages/editor'
 export default {
   name: 'hello',
-  components: {home,videoCenter,microNews,userCenter},
+  components: {home,videoCenter,microNews,userCenter,editor},
   data() {
   	return {
   		active: 0,
   		showPop: false,
+  		showEditor:false,
   		page: [home.name,videoCenter.name,'',microNews.name,userCenter.name]
   	}
   },
@@ -59,10 +65,11 @@ export default {
   		this.showPop = true
   	},
   	close() {
-  		this.showPop = false
+  		this.showEditor = false
   	},
-  	navTo() {
-//		this.$router.push('')
+  	edit() {
+  	  this.showEditor = true
+  	  this.showPop = false
   	}
   }
 }
@@ -70,7 +77,7 @@ export default {
 
 <style lang="scss">
 	.main {
-	  min-height:calc(100vh - 50px);
+	  height:calc(100vh - 50px);
 	  @include bg_color($background-color-theme);
 	  @include font_color($font-color-theme);
 		.send-news {
@@ -94,6 +101,7 @@ export default {
 		.popup {
 			padding:24px 24px 12px 24px;
 		}
+		
 		.toolbars {
 			padding: 24px 0;
 		}
@@ -110,6 +118,10 @@ export default {
       }
       .icon-image {
         color: #16DD9A;
+      }
+      .editor {
+        width:100vw;
+        height:100vh;
       }
 	}
 	

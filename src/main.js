@@ -18,7 +18,10 @@ new Vue({
   template: '<App/>',
   data() {
     return{
-      theme:'theme'
+      theme:'theme',
+      isLogin: false,
+      showLoginBox:false,
+      user:''
     }
   }
 })

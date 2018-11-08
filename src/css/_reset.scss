@@ -11,7 +11,8 @@ a,a:hover{text-decoration:none}
 sup{vertical-align:text-top}
 sub{vertical-align:text-bottom}
 fieldset,img{border:0}
-button,input,select,textarea{font-size:100%}
+button,input,select,textarea{font-size:100%;outline:none}
+textarea{resize:none;}
 table{border-collapse:collapse;border-spacing:0}
 p{word-break:break-all} //p标签字母或者数字自动换行
 

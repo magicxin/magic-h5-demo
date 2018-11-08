@@ -1,5 +1,11 @@
 <template>
 	<div class="newslist">
+	   图片<input type="file" accept="image/*" multiple="multiple" @change="change"/><br>
+	  标题<input v-model="title"/><br>
+	  作者<input v-model="author"/><br>
+	  内容<textarea v-model="article"></textarea><br>
+	<van-button size="normal" @click="tap">普通按钮</van-button><br>
+	  
 	  <van-pull-refresh v-model="isLoading" @refresh="getNewsList">
       <div class="card flex-column" v-for="(item,index) in newsList" :key="index">
         <section class="flex-row">
@@ -35,7 +41,11 @@
 		data() {
 			return {
 				newsList: [],
-				isLoading: false
+				isLoading: false,
+				article:'',
+				title: '',
+				author: '',
+				images: []
 			}
 		},
 		props: {
@@ -46,7 +56,7 @@
 			}
 		},
 		created() {
-			this.getNewsList()
+//			this.getNewsList()
 		},
 		methods: {
 			plusReady() {
@@ -65,6 +75,33 @@
 				  this.newsList = res.data
 				  this.isLoading = false
 				})
+			},
+			tap() {
+			  this.$axios.post('/headline/news/create',{
+			    title: this.title,
+          author:{
+            name:this.author,
+            avatar:'/avatar.jpg'
+          },
+          images:this.images,
+          content:this.article    
+			  })
+			  .then(()=>{
+			    this.$toast('创建文章成功！')
+			  })
+			},
+			change(e) {
+			  console.log(e.target.files)
+			  var formData = new FormData();
+			  Array.prototype.slice.call(e.target.files).forEach((item,index)=>{
+			    formData.append('file' + index, item);
+			  })
+			  this.$axios.post('/headline/upload/upload',formData)
+			  .then((res)=>{
+			    console.log(res.data)
+			    this.images = res.data.urls
+			    this.$toast('上传成功')
+			  })
 			}
 		}
 	}

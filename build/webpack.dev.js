@@ -18,8 +18,14 @@ const devConfig = merge(baseConfig, {
     open: config.dev.autoOpenBrowser,
     hot: true,
     quiet: true,
-    before(app) {
-    	server(app)
+//  before(app) {
+//  	server(app)
+//  },
+    proxy: {
+      '/headline': {
+        target: 'http://192.168.201.111:3000', //目标接口域名
+        changeOrigin: true, //是否跨域
+      }
     }
   },
   plugins: [
