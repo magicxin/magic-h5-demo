@@ -1,6 +1,7 @@
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const config = require('../config')
 
 module.exports = {
   entry: {
@@ -22,11 +23,23 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        use: {
+          loader: 'file-loader',
+          options: {
+          limit: 10000,
+//          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+          }
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
+        use: {
+          loader: 'file-loader',
+          options: {
+          limit: 10000,
+//          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+          }
+        }
       },
       {
         test: /\.js$/,
@@ -58,6 +71,9 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      filename: config.build.index,
+      template: 'index.html'
+    })
   ]
 }
