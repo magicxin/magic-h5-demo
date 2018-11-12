@@ -85,7 +85,6 @@
 
 <style lang="scss" scoped>
 	.newslist {
-	  height:100%;
 	  .list-container {
 	    height:100%;
 	  }
