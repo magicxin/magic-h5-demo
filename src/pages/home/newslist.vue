@@ -50,6 +50,9 @@
 		  console.log(this.addHost('/headline/news/list'))
 			this.getNewsList('hot','10','0')
 		},
+		mounted() {
+		  console.log('mounted')
+		},
 		methods: {
 			plusReady() {
 //			  let video = new plus.video.VideoPlayer('video',{

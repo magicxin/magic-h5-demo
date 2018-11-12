@@ -25,6 +25,13 @@ Vue.mixin({
   }
 })
 
+Vue.directive('scroll',{
+  bind(el) {
+    el.addEventListener('scroll',function(e) {
+      el.dataset.top = e.target.scrollTop
+    })
+  }
+})
 //Vue.directive('theme',{
 //bind(el) {
 //  console.log(el)

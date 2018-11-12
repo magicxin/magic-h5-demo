@@ -8,8 +8,8 @@
       </div>
     </header>
     <van-tabs v-model="swipe" swipeable>
-      <van-tab class="tab-container" v-for="(item,index) in tabs" :title="item.title" :key="index">
-        <news-list :type="item.type"></news-list>
+      <van-tab class="tab-container" ref="$scrolltop" v-scroll v-for="(item,index) in tabs" :title="item.title" :key="index">
+          <news-list :type="item.type"></news-list>
       </van-tab>
     </van-tabs>
 	</div>
@@ -41,11 +41,19 @@
 		created() {
 			
 		},
+		mounted() {
+		  console.log('home')
+		},
 		methods: {
 			plusReady() {
 			  
 			}
-		}
+		},
+    activated() {
+      this.$refs.$scrolltop.forEach((item,index)=>{
+        item.$el.scrollTop = item.$el.dataset.top
+      })
+    }
 	}
 </script>
 
@@ -90,7 +98,8 @@
     }
     .tab-container {
       height:calc(100vh - 140px);
-      overflow:scroll;
+      overflow: scroll;
+      -webkit-overflow-scrolling : touch;
     }
 	}
 </style>

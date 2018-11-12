@@ -31,7 +31,10 @@
         <van-button class="mb-14" size="large" @click="cancel">取消</van-button>
       </van-cell-group>
     </van-popup>-->
-    <router-view/>
+    <keep-alive> 
+      <router-view v-if="$route.meta.keepAlive"/>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"/>
   </div>
 </template>
 
