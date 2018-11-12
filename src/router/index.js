@@ -14,7 +14,7 @@ Vue.use(Router)
 export default new Router({
   routes: [{
       path: '/',
-      redirect: '/main/home'
+      redirect: '/main'
     },
     {
       path: '/main',
@@ -22,7 +22,7 @@ export default new Router({
       component: main,
       meta: {
         exit: true,
-        keepAlive: false
+        keepAlive: true
       },
       children: [{
         path: 'home',
@@ -30,7 +30,7 @@ export default new Router({
         component: home,
         meta: {
           exit: true,
-          keepAlive: true
+          keepAlive: false
         }
       }, {
         path: 'video_center',
@@ -38,7 +38,7 @@ export default new Router({
         component: videoCenter,
         meta: {
           exit: true,
-          keepAlive: true
+          keepAlive: false
         }
       }, {
         path: 'micro_news',
@@ -46,7 +46,7 @@ export default new Router({
         component: microNews,
         meta: {
           exit: true,
-          keepAlive: true
+          keepAlive: false
         }
       }, {
         path: 'user_center',
