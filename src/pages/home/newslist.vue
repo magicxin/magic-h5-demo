@@ -46,11 +46,10 @@
 			}
 		},
 		created() {
-		  console.log(this.addHost('/headline/news/list'))
 			this.getNewsList('hot','10','0')
 		},
 		mounted() {
-		  console.log('mounted')
+		  
 		},
 		methods: {
 			plusReady() {
@@ -69,7 +68,6 @@
 				  }
 				})
 				.then(res=>{
-				  console.log(res.data.data)
 				  this.newsList = res.data.data
 				  this.isLoading = false
 				})

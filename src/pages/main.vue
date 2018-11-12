@@ -3,17 +3,16 @@
 		<div class="send-news" @click="popup">
 			+
 		</div>
-		<!--<component :is="page[active]"></component>-->
+		<component :is="page[active]"></component>
 		<!--<keep-alive>-->
-      <router-view></router-view>
+      <!--<router-view></router-view>-->
     <!--</keep-alive>-->
-		
     <van-tabbar v-model="active">
-		  <van-tabbar-item icon="shop" to="home" replace>首页</van-tabbar-item>
-		  <van-tabbar-item icon="chat" to="video_center" replace>视频</van-tabbar-item>
+		  <van-tabbar-item icon="shop">首页</van-tabbar-item>
 		  <van-tabbar-item icon="chat">视频</van-tabbar-item>
-		  <van-tabbar-item icon="records" to="micro_news" replace>微头条</van-tabbar-item>
-		  <van-tabbar-item icon="gold-coin" to="user_center" replace>我的</van-tabbar-item>
+		  <van-tabbar-item icon="chat">视频</van-tabbar-item>
+		  <van-tabbar-item icon="records">微头条</van-tabbar-item>
+		  <van-tabbar-item icon="gold-coin">我的</van-tabbar-item>
 		</van-tabbar>
 		
 		<van-popup v-model="showPop" position="bottom" class="popup">
@@ -44,20 +43,20 @@
 </template>
 
 <script>
-//import home from 'pages/home/home'
-//import videoCenter from 'pages/videoCenter/video-center'
-//import microNews from 'pages/microNews/micro-news'
-//import userCenter from 'pages/userCenter/user-center'
+import home from 'pages/home/home'
+import videoCenter from 'pages/videoCenter/video-center'
+import microNews from 'pages/microNews/micro-news'
+import userCenter from 'pages/userCenter/user-center'
 import editor from 'pages/editor'
 export default {
   name: 'hello',
-  components: {editor},
+  components: {editor,home,videoCenter,microNews,userCenter},
   data() {
   	return {
-  		active: 0,
+  	  active:0,
   		showPop: false,
   		showEditor:false,
-//		page: [home.name,videoCenter.name,'',microNews.name,userCenter.name]
+		page: [home.name,videoCenter.name,'',microNews.name,userCenter.name]
   	}
   },
   mounted() {
@@ -73,7 +72,7 @@ export default {
   	edit() {
   	  this.showEditor = true
   	  this.showPop = false
-  	}
+  	},
   }
 }
 </script>

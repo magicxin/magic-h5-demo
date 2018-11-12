@@ -42,7 +42,7 @@
 			
 		},
 		mounted() {
-		  console.log('home')
+		  
 		},
 		methods: {
 			plusReady() {
