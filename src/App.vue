@@ -1,7 +1,7 @@
 <template>
   <div id="app" :data-theme="$root.theme">
-    <transition name="move">
-      <div v-if="$root.showLoginBox" class="login-box">
+    <transition name="move" v-on:after-enter="afterEnter">
+      <div v-if="$root.showLoginBox" class="login-box" ref="loginbox">
         <van-cell-group class="form-box">
           <van-field v-model="username" required clearable label="用户名" placeholder="请输入用户名" />
           <van-field class="mb-14" v-model="password" type="password" label="密码" placeholder="请输入密码" required />
@@ -31,10 +31,7 @@
         <van-button class="mb-14" size="large" @click="cancel">取消</van-button>
       </van-cell-group>
     </van-popup>-->
-    <keep-alive> 
-      <router-view v-if="$route.meta.keepAlive"/>
-    </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"/>
+    <router-view/>
   </div>
 </template>
 
@@ -52,6 +49,10 @@
       //  console.log(this.$route.exit)
     },
     methods: {
+      afterEnter(){
+        this.$refs.loginbox.style.width='100%'
+
+      },
       plusReady() {
         let that = this
         plus.key.addEventListener("backbutton", function() {
@@ -100,7 +101,7 @@
     .login-box {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 0px;
       width: 100vw;
       height: 100vh;
       z-index: 2000;
