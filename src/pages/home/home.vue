@@ -24,7 +24,7 @@
 			return {
 			  tabs: [{
         title: '推荐',
-        type: 'all'
+        type: ''
       },{
         title: '热点',
         type: 'hot'

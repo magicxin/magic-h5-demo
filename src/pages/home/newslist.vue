@@ -1,28 +1,16 @@
 <template>
 	<div class="newslist">
-	   图片<input type="file" accept="image/*" multiple="multiple" @change="change"/><br>
-		 <select v-model="newsType">
-			 <option value="all">推荐</option>
-			 <option value="hot">热点</option>
-			 <option value="city">长春</option>
-			 <option value="entertainment">娱乐</option>
-		 </select><br>
-	  标题<input v-model="title"/><br>
-	  作者<input v-model="author"/><br>
-	  内容<textarea v-model="article"></textarea><br>
-	<van-button size="normal" @click="tap">普通按钮</van-button><br>
-	  
-	  <van-pull-refresh v-model="isLoading" @refresh="getNewsList">
-      <div class="card flex-column" v-for="(item,index) in newsList" :key="index">
+	  <van-pull-refresh class="list-container" v-model="isLoading" @refresh="getNewsList">
+      <div class="card flex-column" v-for="(item,index) in newsList" :key="index" @click="routeTo(item._id)">
         <section class="flex-row">
           <header class="title">{{item.title}}</header>
           <div class="image-container">
-            <img :src="item.images[0]"/>
+            <img :src="addPath(item.images[0])"/>
           </div>
         </section>
         <footer class="footer">
           <van-icon name="contact" class="icon-author"/>
-          <span>{{item.author}}</span>
+          <span>{{item.author.name}}</span>
         </footer>
       </div>
     </van-pull-refresh>
@@ -47,23 +35,19 @@
 		data() {
 			return {
 				newsList: [],
-				isLoading: false,
-				article:'',
-				title: '',
-				author: '',
-				images: [],
-				newsType: 'all',
+				isLoading: false
 			}
 		},
 		props: {
 			type: {
 				type: String,
 				default: "all",
-				validator: val => ["all", "hot", "city", "entertainment"].indexOf(val) > -1
+				validator: val => ["", "hot", "city", "entertainment"].indexOf(val) > -1
 			}
 		},
 		created() {
-//			this.getNewsList()
+		  console.log(this.addHost('/headline/news/list'))
+			this.getNewsList('hot','10','0')
 		},
 		methods: {
 			plusReady() {
@@ -72,43 +56,27 @@
 //        controls: false
 //      });
 			},
-			getNewsList() {
+			getNewsList(type,pageSize,count) {
 			  this.isLoading = true
-				this.$axios.get('getNews',{params: {
-				  type:this.type
-				}})
+				this.$axios.get(this.addHost('/headline/news/list'),{
+				  params:{
+				    type:this.type,
+            pageSize: pageSize,
+            count: count
+				  }
+				})
 				.then(res=>{
-				  console.log(res.data)
-				  this.newsList = res.data
+				  console.log(res.data.data)
+				  this.newsList = res.data.data
 				  this.isLoading = false
 				})
 			},
-			tap() {
-			  this.$axios.post('/headline/news/create',{
-					title: this.title,
-					type: this.newsType,
-          author:{
-            name:this.author,
-            avatar:'/avatar.jpg'
-          },
-          images:this.images,
-          content:this.article    
-			  })
-			  .then(()=>{
-			    this.$toast('创建文章成功！')
-			  })
-			},
-			change(e) {
-			  console.log(e.target.files)
-			  var formData = new FormData();
-			  Array.prototype.slice.call(e.target.files).forEach((item,index)=>{
-			    formData.append('file' + index, item);
-			  })
-			  this.$axios.post('/headline/upload/upload',formData)
-			  .then((res)=>{
-			    console.log(res.data)
-			    this.images = res.data.urls
-			    this.$toast('上传成功')
+			routeTo(id) {
+			  this.$router.push({
+			    name:'news_detail',
+			    params: {
+			      _id: id
+			    }
 			  })
 			}
 		}
@@ -117,6 +85,10 @@
 
 <style lang="scss" scoped>
 	.newslist {
+	  height:100%;
+	  .list-container {
+	    height:100%;
+	  }
 		.card {
 			display:flex;
 			padding:14px;
@@ -127,8 +99,10 @@
 			}
 			.image-container {
 				flex: 3 1 0;
+				height:33vw;
 				img {
 					width:100%;
+					height:100%;
 					object-fit: cover;
 				}
 				video {
