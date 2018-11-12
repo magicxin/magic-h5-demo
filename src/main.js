@@ -5,7 +5,7 @@ import router from './router'
 import Vant from 'vant'
 import FastClick from 'fastclick';
 import '@/css/common.scss'
-import 'vant/lib/vant-css/index.css'
+import 'vant/lib/index.css'
 import '@/css/_reset.scss'
 
 Vue.config.productionTip = false

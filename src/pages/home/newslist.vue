@@ -12,7 +12,6 @@
           <van-icon name="contact" class="icon-author"/>
           <span>{{item.author.name}}</span>
         </footer>
-        </footer>
       </div>
     </van-pull-refresh>
 		<!--<div class="card flex-column">
