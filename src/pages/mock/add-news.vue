@@ -1,6 +1,6 @@
 <template>
 	<div class="add-news">
-	  图片<input type="file" accept="image/*" multiple="multiple" @change="change"/><br>
+	  图片<input type="file" accept="audio/*|video/*|image/*|MIME_type" multiple="multiple" @change="change"/><br>
 	 <select v-model="type">
 	   <option value="hot">热门</option>
 	   <option value="city">长春</option>

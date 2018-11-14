@@ -1,17 +1,33 @@
 import Vue from 'vue'
 import axios from 'axios'
 import config from '../../config'
+import plus from './plus'
+
 Vue.$axios = Vue.prototype.$axios = axios
+Vue.use(plus)
+//var onPlusReady = function(callback, context = this) {
+//if(window.plus) {
+//  callback.call(context);
+//} else {
+//  document.addEventListener('plusready', callback.bind(context));
+//}
+//console.log(context.plusReady)
+//callback();
+//};
+
 Vue.mixin({
-  created() {
-  	if(this.plusReady) {
-  		let that = this
-  		document.addEventListener("plusready", this.plusReady, false)
-  	}
-  },
-  destroyed() {
-  	document.removeEventListener("plusready", this.plusReady)
-  },
+//beforeCreate: function() {
+//  onPlusReady(this.plusReady?this.plusReady:function(){},this);
+//},
+//created() {
+//  if(this.plusReady) {
+//    let that = this
+//    document.addEventListener("plusready", this.plusReady, false)
+//  }
+//},
+//destroyed() {
+//  document.removeEventListener("plusready", this.plusReady)
+//},
   methods: {
     routeLogin() {
       this.$root.showLoginBox = true
@@ -25,9 +41,9 @@ Vue.mixin({
   }
 })
 
-Vue.directive('scroll',{
+Vue.directive('scroll', {
   bind(el) {
-    el.addEventListener('scroll',function(e) {
+    el.addEventListener('scroll', function(e) {
       el.dataset.top = e.target.scrollTop
     })
   }
@@ -42,4 +58,3 @@ Vue.directive('scroll',{
 //  el.dataset.theme = Vue.$theme
 //}
 //})
-

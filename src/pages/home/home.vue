@@ -98,8 +98,6 @@
     }
     .tab-container {
       height:calc(100vh - 140px);
-      overflow: scroll;
-      -webkit-overflow-scrolling : touch;
     }
 	}
 </style>

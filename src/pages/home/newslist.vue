@@ -1,6 +1,8 @@
 <template>
 	<div class="newslist">
-	  <van-pull-refresh class="list-container" v-model="isLoading" @refresh="getNewsList">
+	  <!--<van-pull-refresh class="list-container" v-model="isLoading" @refresh="getNewsList">-->
+    <!-- content goes here -->
+	  <jc-loadmore class="list-container" :onRefresh="refresh" :onInfinite="loadmore">
       <div class="card flex-column" v-for="(item,index) in newsList" :key="index" @click="routeTo(item._id)">
         <section class="flex-row">
           <header class="title">{{item.title}}</header>
@@ -13,7 +15,9 @@
           <span>{{item.author.name}}</span>
         </footer>
       </div>
-    </van-pull-refresh>
+      <div v-if="finished" slot="infinite" class="text-center">没有更多数据</div>
+      </jc-loadmore>
+      
 		<!--<div class="card flex-column">
 			<section class="flex-row">
 				<header class="title">习近平主持政治局会议 分析研究当前经济形势和经济工作</header>
@@ -30,12 +34,15 @@
 </template>
 
 <script>
+  import jcLoadmore from 'components/jc-loadmore'
 	export default {
 		name: 'newslist',
+		components: {jcLoadmore},
 		data() {
 			return {
 				newsList: [],
-				isLoading: false
+        count:0,
+        finished:false
 			}
 		},
 		props: {
@@ -46,7 +53,10 @@
 			}
 		},
 		created() {
-			this.getNewsList('hot','10','0')
+			this.getNewsList('hot','5','0')
+        .then(res=>{
+          this.newsList = res.data.data
+        })
 		},
 		mounted() {
 		  
@@ -58,19 +68,43 @@
 //        controls: false
 //      });
 			},
+			loadmore(done) {
+			  this.count++
+			  this.getNewsList('hot','5',this.count*5)
+			  .then(res=>{
+			    this.newsList = this.newsList.concat(res.data.data)
+			    if(res.data.data.length === 0) {
+			      this.finished = true
+			    }
+			    done()
+			  })
+			},
+			refresh(done) {
+			  this.getNewsList('hot','5','0')
+			  .then(res=>{
+			    this.newsList = res.data.data
+			    done()
+			  })
+			},
 			getNewsList(type,pageSize,count) {
 			  this.isLoading = true
-				this.$axios.get(this.addHost('/headline/news/list'),{
-				  params:{
-				    type:this.type,
-            pageSize: pageSize,
-            count: count
-				  }
+				return new Promise((resolve,reject)=>{
+				  this.$axios.get(this.addHost('/headline/news/list'),{
+            params:{
+              type:this.type,
+              pageSize: pageSize,
+              count: count
+            }
+          }).then(resolve)
+          .catch(reject)
 				})
-				.then(res=>{
-				  this.newsList = res.data.data
-				  this.isLoading = false
-				})
+//				.then(res=>{
+//				  this.newsList = this.newsList.concat(res.data.data)
+//				  console.log(this.newsList)
+//				  this.isLoading = false
+//				  this.bottomLoaded = false;
+//				  if(res.data.data.length === 0) this.finished = true
+//				})
 			},
 			routeTo(id) {
 			  this.$router.push({
@@ -86,9 +120,13 @@
 
 <style lang="scss" scoped>
 	.newslist {
-	  .list-container {
+	  height:100%;
+	  position:relative;
+	  /*.list-container {
 	    height:100%;
-	  }
+	    overflow: scroll;
+      -webkit-overflow-scrolling : touch;
+	  }*/
 		.card {
 			display:flex;
 			padding:14px;
