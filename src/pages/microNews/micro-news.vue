@@ -133,7 +133,7 @@
 					}
 					.list_image{
 						li{
-							width:32.5%;
+							width:32.3%;
 							display: inline-block;
 							img{
 								width:100%;
