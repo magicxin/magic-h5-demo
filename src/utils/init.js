@@ -36,7 +36,7 @@ Vue.mixin({
       return config[config.env].origin + url
     },
     addHost(url) {
-      return config[config.env].hostname + ':' + config[config.env].port + url
+      return config[config.env].hostname + url
     }
   }
 })

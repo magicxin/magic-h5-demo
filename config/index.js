@@ -7,14 +7,13 @@ module.exports = {
 //  origin: 'http://magix.xyz:3000',
     origin: 'http://192.168.201.111:3000',
     host: '0.0.0.0',
-    hostname: 'http://localhost',
+    hostname: '',
     port: 8082,
     autoOpenBrowser: false
   },
   build: {
     origin: 'http://magix.xyz:3000',
-    hostname: 'http://magix.xyz',
-    port: 3000,
+    hostname: 'http://magix.xyz:3000',
     assetsSubDirectory: 'static',
     assetsRoot:  path.resolve(__dirname, '../native'),
     index: 'index.html'
