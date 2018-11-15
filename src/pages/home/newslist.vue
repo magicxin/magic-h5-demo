@@ -69,17 +69,20 @@
 //      });
 			},
 			loadmore(done) {
-			  this.count++
-			  this.getNewsList('hot','5',this.count*5)
-			  .then(res=>{
-			    this.newsList = this.newsList.concat(res.data.data)
-			    if(res.data.data.length === 0) {
-			      this.finished = true
-			    }
-			    done()
-			  })
+			  if(!this.finished) {
+			    this.count++
+          this.getNewsList('hot','5',this.count*5)
+          .then(res=>{
+            this.newsList = this.newsList.concat(res.data.data)
+            if(res.data.data.length === 0) {
+              this.finished = true
+            }
+            done()
+          })
+			  }
 			},
 			refresh(done) {
+			  this.finished = false
 			  this.getNewsList('hot','5','0')
 			  .then(res=>{
 			    this.newsList = res.data.data
@@ -130,6 +133,7 @@
 		.card {
 			display:flex;
 			padding:14px;
+			border-bottom: 1px solid #EBEBEB;
 			.title {
 			  color:#333;
 				padding-right:10px;
@@ -154,7 +158,7 @@
 			  align-items: center;
 				padding: 4px 0;
 				font-size: 12px;
-				border-bottom: 1px solid #EBEBEB;
+				
 			}
 			.icon-author {
 			  color: red;

@@ -7,7 +7,7 @@ module.exports = {
 //  origin: 'http://magix.xyz:3000',
     origin: 'http://192.168.201.111:3000',
     host: '0.0.0.0',
-    hostname: 'http://192.168.201.111',
+    hostname: 'http://localhost',
     port: 8082,
     autoOpenBrowser: false
   },

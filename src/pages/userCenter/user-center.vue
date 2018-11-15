@@ -29,7 +29,7 @@
 	  </div>
 	  <div v-else class="user-background">
       <div class="user-cell" @click="routeLogin">
-        <div class="avatar"><img src="../../../static/img/news8.jpg"/></div>
+        <div class="avatar"><img src="../../../static/img/avatar.png"/></div>
         <div class="nickname">请登录</div>
         <div class="icon flex-row flex-center">
           <van-icon name="arrow" />
