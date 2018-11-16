@@ -2,14 +2,17 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const config = require('../config')
+//const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+let isDev = process.env.NODE_ENV==='development'?true:false
 module.exports = {
   entry: {
     main:'./src/main.js'
   },
   output: {
+    path: config.assetsRoot,
     filename: '[name].js',
-    path: path.resolve(__dirname,'../native')
   },
   module: {
     rules: [
@@ -17,17 +20,43 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
+//    {
+//      test: /\.(sa|sc|c)ss$/,
+//      use: [
+//        process.env.NODE_ENV==='development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+//        'css-loader',
+//        'postcss-loader',
+//        'sass-loader',
+//      ],
+//    },
       {
-        test: /\.css$/,
-        use: ['style-loader','css-loader']
+        test: /\.(sa|c)ss$/,
+        use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader,'css-loader','postcss-loader']
+      },{
+        test: /\.scss$/,
+        use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader,'css-loader','sass-loader',
+        'postcss-loader',
+        {
+          loader: 'sass-resources-loader',
+          options: {
+             resources: path.resolve(__dirname,'../src/css/common.scss'),
+          }
+        }]
       },
+//    {
+//      test: /\.css$/,
+//      use: ExtractTextPlugin.extract({
+//        fallback: "style-loader",
+//        use: "css-loader"
+//      })
+//    },
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: {
           loader: 'file-loader',
           options: {
-          limit: 10000,
-//          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+            limit: 10000,
+            name: 'img/[name].[hash:7].[ext]'
           }
         }
       },
@@ -36,8 +65,8 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-          limit: 10000,
-//          name: utils.assetsPath('media/[name].[hash:7].[ext]')
+            limit: 10000,
+            name: 'fonts/[name].[hash:7].[ext]'
           }
         }
       },
@@ -47,16 +76,7 @@ module.exports = {
         use: {
         	loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.scss$/,
-        use: ['style-loader','css-loader','sass-loader',{
-          loader: 'sass-resources-loader',
-          options: {
-             resources: path.resolve(__dirname,'../src/css/common.scss'),
-          }
-        }]
-      },
+      }
     ]
   },
   resolve: {
@@ -67,15 +87,15 @@ module.exports = {
       'css':path.resolve(__dirname,'../src/css'),
       'assets':path.resolve(__dirname,'../src/assets'),
       'components':path.resolve(__dirname,'../src/components'),
-      'utils':path.resolve(__dirname,'../src/utils'),
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      filename: config.build.index,
+      filename: config.index,
       template: 'index.html'
     })
+//  new ExtractTextPlugin("styles.css")
   ]
 }

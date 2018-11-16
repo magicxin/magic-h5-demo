@@ -33,10 +33,10 @@ Vue.mixin({
       this.$root.showLoginBox = true
     },
     addPath(url) {
-      return config[config.env].origin + url
+      return config.origin + url
     },
     addHost(url) {
-      return config[config.env].hostname + url
+      return config.hostname + url
     }
   }
 })

@@ -5,7 +5,6 @@ import router from './router'
 import Vant from 'vant'
 import FastClick from 'fastclick';
 import VueVideoPlayer from 'vue-video-player'
-import VueScroller from 'vue-scroller'
 import '@/css/common.scss'
 import 'vant/lib/index.css'
 import '@/css/_reset.scss'
@@ -13,7 +12,6 @@ import 'video.js/dist/video-js.css'
 
 Vue.config.productionTip = false
 Vue.use(Vant)
-Vue.use(VueScroller)
 Vue.use(VueVideoPlayer, /* {
   options: global default options,
   events: global videojs events
