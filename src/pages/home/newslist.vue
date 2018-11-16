@@ -2,7 +2,7 @@
 	<div class="newslist">
 	  <!--<van-pull-refresh class="list-container" v-model="isLoading" @refresh="getNewsList">-->
     <!-- content goes here -->
-	  <jc-loadmore class="list-container" :onRefresh="refresh" :onInfinite="loadmore">
+	  <jc-loadmore v-scroll ref="scroll" class="list-container" :onRefresh="refresh" :onInfinite="loadmore">
       <div class="card flex-column" v-for="(item,index) in newsList" :key="index" @click="routeTo(item._id)">
         <section class="flex-row">
           <header class="title">{{item.title}}</header>
@@ -117,6 +117,9 @@
 			    }
 			  })
 			}
+		},
+		activated() {
+		  this.$refs['scroll'].$el.scrollTop = this.$refs['scroll'].$el.dataset.top
 		}
 	}
 </script>
