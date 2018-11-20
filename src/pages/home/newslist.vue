@@ -7,7 +7,7 @@
         <section class="flex-row">
           <header class="title">{{item.title}}</header>
           <div class="image-container">
-            <img :src="addPath(item.images[0])"/>
+            <img v-load :src="addPath(item.images[0])"/>
           </div>
         </section>
         <footer class="footer">
@@ -17,7 +17,7 @@
       </div>
       <div v-if="finished" slot="infinite" class="text-center">没有更多数据</div>
       </jc-loadmore>
-      
+    <jc-empty v-if="newsList.length === 0"></jc-empty> 
 		<!--<div class="card flex-column">
 			<section class="flex-row">
 				<header class="title">习近平主持政治局会议 分析研究当前经济形势和经济工作</header>
@@ -30,14 +30,16 @@
 				<span>央视网新闻</span>
 			</footer>
 		</div>-->
+		
 	</div>
 </template>
 
 <script>
   import jcLoadmore from 'components/jc-loadmore'
+  import jcEmpty from 'components/jc-empty.vue'
 	export default {
 		name: 'newslist',
-		components: {jcLoadmore},
+		components: {jcLoadmore,jcEmpty},
 		data() {
 			return {
 				newsList: [],

@@ -1,5 +1,6 @@
 <template>
 	<div class="news-detail">
+	  <van-nav-bar title="详情" left-arrow @click-left="routeTo" />
 	  <div v-html="content"></div>
 	</div>
 </template>
@@ -25,7 +26,9 @@
 			})
 		},
 		methods: {
-			
+			routeTo() {
+			  this.$router.back()
+			}
 		}
 	}
 </script>

@@ -4,7 +4,7 @@
       <div slot="right">发布</div>
     </van-nav-bar>
     <div>
-      <textarea class="textarea" maxlength="100"></textarea>
+      <textarea class="textarea" maxlength="100" v-focus></textarea>
       <div class="img-btn">
         +
       </div>

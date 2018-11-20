@@ -5,7 +5,7 @@ import router from './router'
 import Vant from 'vant'
 import FastClick from 'fastclick';
 import VueVideoPlayer from 'vue-video-player'
-import '@/css/common.scss'
+//import '@/css/common.scss'
 import 'vant/lib/index.css'
 import '@/css/_reset.scss'
 import 'video.js/dist/video-js.css'

@@ -9,6 +9,7 @@ import accelerometer from '../pages/examples/accelerometer'
 import launch from '../pages/launch'
 import addNews from '../pages/mock/add-news'
 import newsDetail from '../pages/home/news-detail'
+import search from '../pages/home/search'
 Vue.use(Router)
 
 export default new Router({
@@ -78,6 +79,14 @@ export default new Router({
       path: '/news_detail/:_id',
       name: 'news_detail',
       component: newsDetail,
+      meta: {
+        keepAlive: false
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: search,
       meta: {
         keepAlive: false
       }

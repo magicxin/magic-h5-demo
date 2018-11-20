@@ -18,7 +18,7 @@ const prodConfig = merge(baseConfig, {
   },
   optimization: {
     minimize: true,
-    runtimeChunk: { // 一下两个对象取代了CommonChunkPlugin
+    runtimeChunk: { // 以下两个对象取代了CommonChunkPlugin
       name: "manifest"
     },
     splitChunks: {

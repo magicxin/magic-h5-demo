@@ -2,7 +2,7 @@
 	<div class="home">
 		<header class="ma-header">
       <div class="logo"></div>
-      <div class="search">
+      <div class="search" @click="routeTo">
         <van-icon name="search" />
         <div style="margin-left:4px;">爬山偶遇外交部长</div>
       </div>
@@ -45,8 +45,8 @@
 		  
 		},
 		methods: {
-			plusReady() {
-			  
+			routeTo() {
+			  this.$router.push('search')
 			}
 		},
     activated() {

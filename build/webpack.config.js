@@ -87,6 +87,7 @@ module.exports = {
       'css':path.resolve(__dirname,'../src/css'),
       'assets':path.resolve(__dirname,'../src/assets'),
       'components':path.resolve(__dirname,'../src/components'),
+      'utils': path.resolve(__dirname,'../src/utils'),
     },
     extensions: ['*', '.js', '.vue', '.json']
   },

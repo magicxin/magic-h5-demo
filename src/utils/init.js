@@ -2,7 +2,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import config from '../../config'
 import plus from './plus'
-
+import './directives'
 Vue.$axios = Vue.prototype.$axios = axios
 Vue.use(plus)
 //var onPlusReady = function(callback, context = this) {
@@ -40,21 +40,3 @@ Vue.mixin({
     }
   }
 })
-
-Vue.directive('scroll', {
-  bind(el) {
-    el.addEventListener('scroll', function(e) {
-      el.dataset.top = e.target.scrollTop
-    })
-  }
-})
-//Vue.directive('theme',{
-//bind(el) {
-//  console.log(el)
-//  el.dataset.theme = Vue.$theme
-//},
-//updated(el) {
-//  console.log(el)
-//  el.dataset.theme = Vue.$theme
-//}
-//})
