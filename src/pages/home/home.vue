@@ -92,7 +92,7 @@
     .logo {
       width:70px;
       height: 18px;
-      background-image:url('//s3b.pstatp.com/growth/mobile_list/image/wap_logo@3x_581de69e.png');
+      background-image:url('~@/../static/img/logo.png');
       background-repeat: no-repeat;
       background-size: 100% 100%;
     }

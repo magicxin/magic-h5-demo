@@ -28,7 +28,7 @@
 .empty {
   position: relative;
   height: 230px;
-  background: url(../../static/img/empty.png) no-repeat center 100px;
+  background: url('~@/../static/img/empty.png') no-repeat center 100px;
   background-size: 226px;
   .text {
     position: absolute;

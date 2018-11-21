@@ -9,8 +9,8 @@ const build = {
     index: 'index.html'
   }
 const dev = {
-//  origin: 'http://magix.xyz:3000',
-    origin: 'http://192.168.201.111:3000',
+    origin: 'http://magix.xyz:3000',
+//  origin: 'http://192.168.201.111:3000',
     host: '0.0.0.0',
     hostname: '',
     port: 8082,
